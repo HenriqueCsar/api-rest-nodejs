@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Escola</title>
+</head>
+<body>
+    <h1>Sistema Escolar</h1>
+    <ul id="turmas"></ul>
+    <hr>
+    <h4> Cadastrar novo aluno </h4>
+    <input type="text" name="aluno" placeholder="Aluno" id="aluno"><br>
+    <input type="text" name="ano" placeholder="Ano" id="ano"><br>
+    <input type="text" name="curso" placeholder="Curso  " id="curso"><br>
+    <button onclick="cadastrarAluno()">Cadastrar Aluno</button>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>    
+
+
+    function cadastrarAluno(){
+        axios.get("http://localhost:8080/turmas").then(response => {
+            response.data.forEach(aluno =>{
+                id = aluno.id;
+            });
+
+            var aluno = document.getElementById("aluno");
+            var ano = document.getElementById("ano");
+            var curso = document.getElementById("curso");
+            var id;
+
+            console.log(parseInt(id));
+            var aluno =
+            {
+                id: parseInt(id)+1,
+                aluno: aluno.value,
+                ano: ano.value,
+                curso: curso.value
+            }
+
+
+        axios.post("http://localhost:8080/turma", aluno).then(response => {
+            alert('Aluno Cadastrado com sucesso.');
+        }).catch(error => {
+            console.log(error);
+        });
+
+        }).catch()
+
+    }
+
+
+    function excluirAluno(element){
+        var id = element.getAttribute('data-id');
+
+        axios.delete("http://localhost:8080/turma/"+id).then(response => {
+
+            
+            alert('Aluno ' + element.getAttribute('data-aluno') + ' Removido com sucesso!');
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+
+
+    axios.get("http://localhost:8080/turmas").then(response => {
+        var turmas = document.getElementById("turmas");
+        
+        response.data.forEach(aluno => {
+            var element = document.createElement("li");
+            element.innerHTML = 'Aluno: '+aluno.aluno+' Curso: '+aluno.curso+ ' Ano: ' +aluno.ano;
+            var button = document.createElement("button");
+            button.innerHTML = 'Excluir'
+            element.appendChild(button);
+
+            element.setAttribute('data-id', aluno.id);
+            element.setAttribute('data-aluno', aluno.aluno);
+            element.setAttribute('data-ano', aluno.ano);
+            element.setAttribute('data-curso', aluno.curso);
+
+
+            button.addEventListener('click', ()=> {
+                excluirAluno(element)
+            });
+
+
+
+            turmas.appendChild(element);
+        });
+
+    }).catch(error => {
+        console.log(error);
+    });
+</script>
+</html>
