@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Sistema Escola</title>
 </head>
 <body>
     <h1>Sistema Escolar</h1>
     <ul id="turmas"></ul>
-    <hr>
-    <h4> Cadastrar novo aluno </h4>
-    <input type="text" name="aluno" placeholder="Aluno" id="aluno"><br>
-    <input type="text" name="ano" placeholder="Ano" id="ano"><br>
-    <input type="text" name="curso" placeholder="Curso  " id="curso"><br>
-    <button onclick="cadastrarAluno()">Cadastrar Aluno</button>
-
+    <div class="form">
+        <h2> Cadastrar novo aluno </h2>
+        <input type="text" name="aluno" placeholder="Aluno" id="aluno"><br>
+        <input type="text" name="ano" placeholder="Ano" id="ano"><br>
+        <input type="text" name="curso" placeholder="Curso  " id="curso"><br>
+        <button onclick="cadastrarAluno()">Cadastrar Aluno</button>
+    </div>>
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>    
 
